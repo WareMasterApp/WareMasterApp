@@ -6,10 +6,12 @@ const warehouseSchema = new mongoose.Schema({
     required: true
   },
   address: String,
-  createdAt: {
-    type: Date,
-    default: Date.now
-  }
+},
+{
+  timestamps: {
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+  },
 });
 
 module.exports = mongoose.model('Warehouse', warehouseSchema);

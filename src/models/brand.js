@@ -8,10 +8,12 @@ const brandSchema = new mongoose.Schema({
     trim: true
   },
   description: String,
-  createdAt: {
-    type: Date,
-    default: Date.now
-  }
+},
+{
+  timestamps: {
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+  },
 });
 
 module.exports = mongoose.model('Brand', brandSchema);

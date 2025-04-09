@@ -29,15 +29,13 @@ const userSchema = new mongoose.Schema({
     type: String,
     enum: ['active', 'suspended', 'pending', 'deleted'],
     default: 'active'
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now
   }
+},
+{
+  timestamps: {
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+  },
 });
 
 userSchema.plugin(passportLocalMongoose);
