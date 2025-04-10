@@ -1,4 +1,4 @@
-const Brand = require('../models/brand');
+const Brand = require('../models/Brand');
 
 const createBrand = async (req, res) => {
   try {
@@ -29,7 +29,7 @@ const getBrandById = async (req, res) => {
   }
 };
 
-const updateBrand = async (req, res) => {
+const updateBrandById = async (req, res) => {
   try {
     const brand = await Brand.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
     if (!brand) return res.status(404).json({ error: 'Brand not found' });
@@ -39,7 +39,7 @@ const updateBrand = async (req, res) => {
   }
 };
 
-const deleteBrand = async (req, res) => {
+const deleteBrandById = async (req, res) => {
   try {
     const brand = await Brand.findByIdAndDelete(req.params.id);
     if (!brand) return res.status(404).json({ error: 'Brand not found' });
@@ -53,6 +53,6 @@ module.exports = {
   createBrand,
   getAllBrands,
   getBrandById,
-  updateBrand,
-  deleteBrand
+  updateBrandById,
+  deleteBrandById
 };

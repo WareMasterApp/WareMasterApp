@@ -1,4 +1,4 @@
-const Account = require('../models/account');
+const Account = require('../models/Account');
 
 const createAccount = async (req, res) => {
   try {
@@ -29,7 +29,7 @@ const getAccountById = async (req, res) => {
   }
 };
 
-const updateAccount = async (req, res) => {
+const updateAccountById = async (req, res) => {
   try {
     const account = await Account.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
     if (!account) return res.status(404).json({ error: 'Account not found' });
@@ -39,7 +39,7 @@ const updateAccount = async (req, res) => {
   }
 };
 
-const deleteAccount = async (req, res) => {
+const deleteAccountById = async (req, res) => {
   try {
     const account = await Account.findByIdAndDelete(req.params.id);
     if (!account) return res.status(404).json({ error: 'Account not found' });
@@ -53,6 +53,6 @@ module.exports = {
   createAccount,
   getAllAccounts,
   getAccountById,
-  updateAccount,
-  deleteAccount
+  updateAccountById,
+  deleteAccountById
 };
