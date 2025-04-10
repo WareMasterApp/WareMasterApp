@@ -35,7 +35,11 @@ const brandController = require('../controllers/brandController');
  *             schema:
  *               $ref: "#/components/schemas/UnprocessableContent"
  *       500:
- *         description: Internal server error
+ *         description: Server error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/ServerError"
  */
 brandRouter.post('/', brandController.createBrand);
 
@@ -55,7 +59,11 @@ brandRouter.post('/', brandController.createBrand);
  *               items:
  *                 $ref: '#/components/schemas/BrandResponse'
  *       500:
- *         description: Internal server error
+ *         description: Server error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/ServerError"
  */
 brandRouter.get('/', brandController.getAllBrands);
 
@@ -81,8 +89,16 @@ brandRouter.get('/', brandController.getAllBrands);
  *               $ref: '#/components/schemas/BrandResponse'
  *       404:
  *         description: Brand not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/ObjectNotFound"
  *       500:
- *         description: Internal server error
+ *         description: Server error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/ServerError"
  */
 brandRouter.get('/:id', brandController.getBrandById);
 
@@ -114,6 +130,10 @@ brandRouter.get('/:id', brandController.getBrandById);
  *               $ref: '#/components/schemas/BrandResponse'
  *       404:
  *         description: Brand not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/ObjectNotFound"
  *       422:
  *         description: Required data incorrect/missing
  *         content:
@@ -121,7 +141,11 @@ brandRouter.get('/:id', brandController.getBrandById);
  *             schema:
  *               $ref: "#/components/schemas/UnprocessableContent"
  *       500:
- *         description: Internal server error
+ *         description: Server error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/ServerError"
  */
 brandRouter.put('/:id', brandController.updateBrand);
 
@@ -151,8 +175,16 @@ brandRouter.put('/:id', brandController.updateBrand);
  *                   example: Brand deleted
  *       404:
  *         description: Brand not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/ObjectNotFound"
  *       500:
- *         description: Internal server error
+ *         description: Server error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/ServerError"
  */
 brandRouter.delete('/:id', brandController.deleteBrand);
 

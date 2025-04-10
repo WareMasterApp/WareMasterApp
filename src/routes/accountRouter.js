@@ -35,7 +35,11 @@ const accountController = require('../controllers/accountController');
  *             schema:
  *               $ref: "#/components/schemas/UnprocessableContent"
  *       500:
- *         description: Bad request
+ *         description: Server error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/ServerError"
  */
 accountRouter.post('/', accountController.createAccount);
 
@@ -55,7 +59,11 @@ accountRouter.post('/', accountController.createAccount);
  *               items:
  *                 $ref: '#/components/schemas/AccountResponse'
  *       500:
- *         description: Internal server error
+ *         description: Server error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/ServerError"
  */
 accountRouter.get('/', accountController.getAllAccounts);
 
@@ -81,8 +89,16 @@ accountRouter.get('/', accountController.getAllAccounts);
  *               $ref: '#/components/schemas/AccountResponse'
  *       404:
  *         description: Account not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/ObjectNotFound"
  *       500:
- *         description: Internal server error
+ *         description: Server error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/ServerError"
  */
 accountRouter.get('/:id', accountController.getAccountById);
 
@@ -114,6 +130,10 @@ accountRouter.get('/:id', accountController.getAccountById);
  *               $ref: '#/components/schemas/AccountResponse'
  *       404:
  *         description: Account not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/ObjectNotFound"
  *       422:
  *         description: Required data incorrect/missing
  *         content:
@@ -121,7 +141,11 @@ accountRouter.get('/:id', accountController.getAccountById);
  *             schema:
  *               $ref: "#/components/schemas/UnprocessableContent"
  *       500:
- *         description: Bad request
+ *         description: Server error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/ServerError"
  */
 accountRouter.put('/:id', accountController.updateAccount);
 
@@ -151,8 +175,16 @@ accountRouter.put('/:id', accountController.updateAccount);
  *                   example: Account deleted
  *       404:
  *         description: Account not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/ObjectNotFound"
  *       500:
- *         description: Internal server error
+ *         description: Server error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/ServerError"
  */
 accountRouter.delete('/:id', accountController.deleteAccount);
 
