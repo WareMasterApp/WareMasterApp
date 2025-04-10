@@ -1,6 +1,6 @@
 const express = require('express');
 const brandRouter = express.Router();
-const brandController = require('../controllers/brandController');
+const { createBrand, getAllBrands, getBrandById, updateBrandById, deleteBrandById } = require('../controllers/brandController');
 
 /**
  * @swagger
@@ -41,7 +41,7 @@ const brandController = require('../controllers/brandController');
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-brandRouter.post('/', brandController.createBrand);
+brandRouter.post('/', createBrand);
 
 /**
  * @swagger
@@ -65,7 +65,7 @@ brandRouter.post('/', brandController.createBrand);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-brandRouter.get('/', brandController.getAllBrands);
+brandRouter.get('/', getAllBrands);
 
 /**
  * @swagger
@@ -100,7 +100,7 @@ brandRouter.get('/', brandController.getAllBrands);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-brandRouter.get('/:id', brandController.getBrandById);
+brandRouter.get('/:id', getBrandById);
 
 /**
  * @swagger
@@ -147,7 +147,7 @@ brandRouter.get('/:id', brandController.getBrandById);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-brandRouter.put('/:id', brandController.updateBrand);
+brandRouter.put('/:id', updateBrandById);
 
 /**
  * @swagger
@@ -186,6 +186,6 @@ brandRouter.put('/:id', brandController.updateBrand);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-brandRouter.delete('/:id', brandController.deleteBrand);
+brandRouter.delete('/:id', deleteBrandById);
 
 module.exports = brandRouter;

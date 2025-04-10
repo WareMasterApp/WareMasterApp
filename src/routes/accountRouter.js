@@ -1,6 +1,6 @@
 const express = require('express');
 const accountRouter = express.Router();
-const accountController = require('../controllers/accountController');
+const { createAccount, getAllAccounts, getAccountById, updateAccountById, deleteAccountById } = require('../controllers/accountController');
 
 /**
  * @swagger
@@ -41,7 +41,7 @@ const accountController = require('../controllers/accountController');
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-accountRouter.post('/', accountController.createAccount);
+accountRouter.post('/', createAccount);
 
 /**
  * @swagger
@@ -65,7 +65,7 @@ accountRouter.post('/', accountController.createAccount);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-accountRouter.get('/', accountController.getAllAccounts);
+accountRouter.get('/', getAllAccounts);
 
 /**
  * @swagger
@@ -100,7 +100,7 @@ accountRouter.get('/', accountController.getAllAccounts);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-accountRouter.get('/:id', accountController.getAccountById);
+accountRouter.get('/:id', getAccountById);
 
 /**
  * @swagger
@@ -147,7 +147,7 @@ accountRouter.get('/:id', accountController.getAccountById);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-accountRouter.put('/:id', accountController.updateAccount);
+accountRouter.put('/:id', updateAccountById);
 
 /**
  * @swagger
@@ -186,6 +186,6 @@ accountRouter.put('/:id', accountController.updateAccount);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-accountRouter.delete('/:id', accountController.deleteAccount);
+accountRouter.delete('/:id', deleteAccountById);
 
 module.exports = accountRouter;
