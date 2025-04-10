@@ -100,6 +100,26 @@ const options = {
               }
             }
           ]
+        },
+        ErrorExample: {
+          type: 'object',
+          properties: {
+            value: {
+              type: 'string',
+              example: 'Must be a valid value',
+            }
+          }
+        },
+        UnprocessableContent: {
+          type: 'object',
+          properties: {
+            errors: {
+              type: 'array',
+              items: {
+                $ref: '#/components/schemas/ErrorExample',
+              }
+            }
+          }
         }
       }
     },

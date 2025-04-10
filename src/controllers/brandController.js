@@ -6,7 +6,7 @@ const createBrand = async (req, res) => {
     await brand.save();
     res.status(201).json(brand);
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(500).json({ error: err.message });
   }
 };
 
@@ -35,7 +35,7 @@ const updateBrand = async (req, res) => {
     if (!brand) return res.status(404).json({ error: 'Brand not found' });
     res.json(brand);
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(500).json({ error: err.message });
   }
 };
 

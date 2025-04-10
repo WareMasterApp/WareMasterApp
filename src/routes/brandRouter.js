@@ -28,8 +28,14 @@ const brandController = require('../controllers/brandController');
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/BrandResponse'
- *       400:
- *         description: Bad request
+ *       422:
+ *         description: Required data incorrect/missing
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/UnprocessableContent"
+ *       500:
+ *         description: Internal server error
  */
 brandRouter.post('/', brandController.createBrand);
 
@@ -106,10 +112,16 @@ brandRouter.get('/:id', brandController.getBrandById);
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/BrandResponse'
- *       400:
- *         description: Bad request
  *       404:
  *         description: Brand not found
+ *       422:
+ *         description: Required data incorrect/missing
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/UnprocessableContent"
+ *       500:
+ *         description: Internal server error
  */
 brandRouter.put('/:id', brandController.updateBrand);
 

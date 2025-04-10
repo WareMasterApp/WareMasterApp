@@ -28,7 +28,13 @@ const accountController = require('../controllers/accountController');
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/AccountResponse'
- *       400:
+ *       422:
+ *         description: Required data incorrect/missing
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/UnprocessableContent"
+ *       500:
  *         description: Bad request
  */
 accountRouter.post('/', accountController.createAccount);
@@ -106,10 +112,16 @@ accountRouter.get('/:id', accountController.getAccountById);
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/AccountResponse'
- *       400:
- *         description: Bad request
  *       404:
  *         description: Account not found
+ *       422:
+ *         description: Required data incorrect/missing
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/UnprocessableContent"
+ *       500:
+ *         description: Bad request
  */
 accountRouter.put('/:id', accountController.updateAccount);
 

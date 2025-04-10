@@ -6,7 +6,7 @@ const createAccount = async (req, res) => {
     await account.save();
     res.status(201).json(account);
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(500).json({ error: err.message });
   }
 };
 
@@ -35,7 +35,7 @@ const updateAccount = async (req, res) => {
     if (!account) return res.status(404).json({ error: 'Account not found' });
     res.json(account);
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(500).json({ error: err.message });
   }
 };
 
