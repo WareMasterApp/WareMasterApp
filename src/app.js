@@ -21,7 +21,7 @@ app.use(express.static('src/public'));
  * Swagger Documentation
  */
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
-app.use('api/account', accountRouter);
-app.use('api/brand', brandRouter);
+app.use('/api/v1/account', accountRouter);
+app.use('/api/v1/brand', brandRouter);
 
 module.exports = app;

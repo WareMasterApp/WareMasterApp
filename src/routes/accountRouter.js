@@ -11,7 +11,7 @@ const accountController = require('../controllers/accountController');
 
 /**
  * @swagger
- * /api/accounts:
+* /api/v1/account:
  *   post:
  *     summary: Create a new account
  *     tags: [Accounts]
@@ -35,7 +35,7 @@ accountRouter.post('/', accountController.createAccount);
 
 /**
  * @swagger
- * /api/accounts:
+* /api/v1/account:
  *   get:
  *     summary: Get all accounts
  *     tags: [Accounts]
@@ -55,7 +55,7 @@ accountRouter.get('/', accountController.getAllAccounts);
 
 /**
  * @swagger
- * /api/accounts/{id}:
+* /api/v1/account/{id}:
  *   get:
  *     summary: Get account by ID
  *     tags: [Accounts]
@@ -82,7 +82,7 @@ accountRouter.get('/:id', accountController.getAccountById);
 
 /**
  * @swagger
- * /api/accounts/{id}:
+* /api/v1/account/{id}:
  *   put:
  *     summary: Update an account
  *     tags: [Accounts]
@@ -115,7 +115,7 @@ accountRouter.put('/:id', accountController.updateAccount);
 
 /**
  * @swagger
- * /api/accounts/{id}:
+* /api/v1/account/{id}:
  *   delete:
  *     summary: Delete an account
  *     tags: [Accounts]

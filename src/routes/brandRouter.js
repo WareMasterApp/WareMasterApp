@@ -11,7 +11,7 @@ const brandController = require('../controllers/brandController');
 
 /**
  * @swagger
- * /api/brands:
+ * /api/v1/brand:
  *   post:
  *     summary: Create a new brand
  *     tags: [Brands]
@@ -35,7 +35,7 @@ brandRouter.post('/', brandController.createBrand);
 
 /**
  * @swagger
- * /api/brands:
+ * /api/v1/brand:
  *   get:
  *     summary: Get all brands
  *     tags: [Brands]
@@ -55,7 +55,7 @@ brandRouter.get('/', brandController.getAllBrands);
 
 /**
  * @swagger
- * /api/brands/{id}:
+ * /api/v1/brand/{id}:
  *   get:
  *     summary: Get brand by ID
  *     tags: [Brands]
@@ -82,7 +82,7 @@ brandRouter.get('/:id', brandController.getBrandById);
 
 /**
  * @swagger
- * /api/brands/{id}:
+ * /api/v1/brand/{id}:
  *   put:
  *     summary: Update a brand
  *     tags: [Brands]
@@ -115,7 +115,7 @@ brandRouter.put('/:id', brandController.updateBrand);
 
 /**
  * @swagger
- * /api/brands/{id}:
+ * /api/v1/brand/{id}:
  *   delete:
  *     summary: Delete a brand
  *     tags: [Brands]
