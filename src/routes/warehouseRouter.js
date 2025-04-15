@@ -1,5 +1,6 @@
 const express = require('express');
 const warehouseRouter = express.Router();
+const { isAuthenticated } = require('../middleware/authenticate');
 
 /**
  * @swagger
@@ -40,7 +41,7 @@ const warehouseRouter = express.Router();
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-warehouseRouter.post('/', createWarehouse);
+warehouseRouter.post('/', isAuthenticated, createWarehouse);
 
 /**
  * @swagger
@@ -64,7 +65,7 @@ warehouseRouter.post('/', createWarehouse);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-warehouseRouter.get('/', getAllWarehouses);
+warehouseRouter.get('/', isAuthenticated, getAllWarehouses);
 
 /**
  * @swagger
@@ -99,7 +100,7 @@ warehouseRouter.get('/', getAllWarehouses);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-warehouseRouter.get('/:id', getWarehouseById);
+warehouseRouter.get('/:id', isAuthenticated, getWarehouseById);
 
 /**
  * @swagger
@@ -146,7 +147,7 @@ warehouseRouter.get('/:id', getWarehouseById);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-warehouseRouter.put('/:id', updateWarehouseById);
+warehouseRouter.put('/:id', isAuthenticated, updateWarehouseById);
 
 /**
  * @swagger
@@ -185,6 +186,6 @@ warehouseRouter.put('/:id', updateWarehouseById);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-warehouseRouter.delete('/:id', deleteWarehouseById);
+warehouseRouter.delete('/:id', isAuthenticated, deleteWarehouseById);
 
 module.exports = warehouseRouter;

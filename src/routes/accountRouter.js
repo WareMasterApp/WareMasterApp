@@ -1,6 +1,13 @@
 const express = require('express');
 const accountRouter = express.Router();
-const { createAccount, getAllAccounts, getAccountById, updateAccountById, deleteAccountById } = require('../controllers/accountController');
+const { isAuthenticated } = require('../middleware/authenticate');
+const {
+  createAccount,
+  getAllAccounts,
+  getAccountById,
+  updateAccountById,
+  deleteAccountById,
+} = require('../controllers/accountController');
 
 /**
  * @swagger
@@ -11,7 +18,7 @@ const { createAccount, getAllAccounts, getAccountById, updateAccountById, delete
 
 /**
  * @swagger
-* /api/v1/account:
+ * /api/v1/account:
  *   post:
  *     summary: Create a new account
  *     tags: [Accounts]
@@ -41,11 +48,11 @@ const { createAccount, getAllAccounts, getAccountById, updateAccountById, delete
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-accountRouter.post('/', createAccount);
+accountRouter.post('/', isAuthenticated, createAccount);
 
 /**
  * @swagger
-* /api/v1/account:
+ * /api/v1/account:
  *   get:
  *     summary: Get all accounts
  *     tags: [Accounts]
@@ -65,11 +72,11 @@ accountRouter.post('/', createAccount);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-accountRouter.get('/', getAllAccounts);
+accountRouter.get('/', isAuthenticated, getAllAccounts);
 
 /**
  * @swagger
-* /api/v1/account/{id}:
+ * /api/v1/account/{id}:
  *   get:
  *     summary: Get account by ID
  *     tags: [Accounts]
@@ -100,11 +107,11 @@ accountRouter.get('/', getAllAccounts);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-accountRouter.get('/:id', getAccountById);
+accountRouter.get('/:id', isAuthenticated, getAccountById);
 
 /**
  * @swagger
-* /api/v1/account/{id}:
+ * /api/v1/account/{id}:
  *   put:
  *     summary: Update an account
  *     tags: [Accounts]
@@ -147,11 +154,11 @@ accountRouter.get('/:id', getAccountById);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-accountRouter.put('/:id', updateAccountById);
+accountRouter.put('/:id', isAuthenticated, updateAccountById);
 
 /**
  * @swagger
-* /api/v1/account/{id}:
+ * /api/v1/account/{id}:
  *   delete:
  *     summary: Delete an account
  *     tags: [Accounts]
@@ -186,6 +193,6 @@ accountRouter.put('/:id', updateAccountById);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-accountRouter.delete('/:id', deleteAccountById);
+accountRouter.delete('/:id', isAuthenticated, deleteAccountById);
 
 module.exports = accountRouter;
