@@ -1,4 +1,5 @@
 const express = require('express');
+const { isAuthenticated } = require('../middleware/authenticate');
 const inventoryRouter = express.Router();
 
 /**
@@ -40,7 +41,7 @@ const inventoryRouter = express.Router();
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-inventoryRouter.post('/', createInventory);
+inventoryRouter.post('/', isAuthenticated, createInventory);
 
 /**
  * @swagger
@@ -64,7 +65,7 @@ inventoryRouter.post('/', createInventory);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-inventoryRouter.get('/', getAllInventory);
+inventoryRouter.get('/', isAuthenticated, getAllInventory);
 
 /**
  * @swagger
@@ -99,7 +100,7 @@ inventoryRouter.get('/', getAllInventory);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-inventoryRouter.get('/:id', getInventoryById);
+inventoryRouter.get('/:id', isAuthenticated, getInventoryById);
 
 /**
  * @swagger
@@ -146,7 +147,7 @@ inventoryRouter.get('/:id', getInventoryById);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-inventoryRouter.put('/:id', updateInventoryById);
+inventoryRouter.put('/:id', isAuthenticated, updateInventoryById);
 
 /**
  * @swagger
@@ -185,6 +186,6 @@ inventoryRouter.put('/:id', updateInventoryById);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-inventoryRouter.delete('/:id', deleteInventoryById);
+inventoryRouter.delete('/:id', isAuthenticated, deleteInventoryById);
 
 module.exports = inventoryRouter;

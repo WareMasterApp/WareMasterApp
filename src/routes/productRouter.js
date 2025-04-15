@@ -1,4 +1,5 @@
 const express = require('express');
+const { isAuthenticated } = require('../middleware/authenticate');
 const productRouter = express.Router();
 
 /**
@@ -40,7 +41,7 @@ const productRouter = express.Router();
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-productRouter.post('/', createProduct);
+productRouter.post('/', isAuthenticated, createProduct);
 
 /**
  * @swagger
@@ -64,7 +65,7 @@ productRouter.post('/', createProduct);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-productRouter.get('/', getAllProducts);
+productRouter.get('/', isAuthenticated, getAllProducts);
 
 /**
  * @swagger
@@ -99,7 +100,7 @@ productRouter.get('/', getAllProducts);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-productRouter.get('/:id', getProductById);
+productRouter.get('/:id', isAuthenticated, getProductById);
 
 /**
  * @swagger
@@ -146,7 +147,7 @@ productRouter.get('/:id', getProductById);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-productRouter.put('/:id', updateProductById);
+productRouter.put('/:id', isAuthenticated, updateProductById);
 
 /**
  * @swagger
@@ -185,6 +186,6 @@ productRouter.put('/:id', updateProductById);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-productRouter.delete('/:id', deleteProductById);
+productRouter.delete('/:id', isAuthenticated, deleteProductById);
 
 module.exports = productRouter;

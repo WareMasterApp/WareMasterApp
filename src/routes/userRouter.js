@@ -1,4 +1,5 @@
 const express = require('express');
+const { isAuthenticated } = require('../middleware/authenticate');
 const userRouter = express.Router();
 
 /**
@@ -40,7 +41,7 @@ const userRouter = express.Router();
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-userRouter.post('/', createUser);
+userRouter.post('/', isAuthenticated, createUser);
 
 /**
  * @swagger
@@ -64,7 +65,7 @@ userRouter.post('/', createUser);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-userRouter.get('/', getAllUsers);
+userRouter.get('/', isAuthenticated, getAllUsers);
 
 /**
  * @swagger
@@ -99,7 +100,7 @@ userRouter.get('/', getAllUsers);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-userRouter.get('/:id', getUserById);
+userRouter.get('/:id', isAuthenticated, getUserById);
 
 /**
  * @swagger
@@ -146,7 +147,7 @@ userRouter.get('/:id', getUserById);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-userRouter.put('/:id', updateUserById);
+userRouter.put('/:id', isAuthenticated, updateUserById);
 
 /**
  * @swagger
@@ -185,6 +186,6 @@ userRouter.put('/:id', updateUserById);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-userRouter.delete('/:id', deleteUserById);
+userRouter.delete('/:id', isAuthenticated, deleteUserById);
 
 module.exports = userRouter;
