@@ -1,9 +1,9 @@
-const express = require('express');
 const cors = require('cors');
+const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const swaggerUI = require('swagger-ui-express');
-const swaggerSpec = require('./docs/apiDoc');
+const { swaggerSpec, swaggerUiOptions } = require('./docs/apiDoc');
 const accountRouter = require('./routes/accountRouter');
 const brandRouter = require('./routes/brandRouter');
 
@@ -20,7 +20,15 @@ app.use(express.static('src/public'));
 /**
  * Swagger Documentation
  */
-app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
+app.use(
+  '/api-docs',
+  swaggerUI.serve,
+  swaggerUI.setup(swaggerSpec, swaggerUiOptions)
+);
+
+/**
+ * API Routes
+ */
 app.use('/api/v1/account', accountRouter);
 app.use('/api/v1/brand', brandRouter);
 
