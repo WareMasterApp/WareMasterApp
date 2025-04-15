@@ -1,7 +1,11 @@
 const express = require('express');
 const authRouter = express.Router();
 const passport = require('../helpers/pasportStrategy');
-const { gitHubLogin, logout } = require('../controllers/authController');
+const {
+  gitHubLogin,
+  logout,
+  googleLogin,
+} = require('../controllers/authController');
 
 authRouter.get('/login', () => {});
 
@@ -14,6 +18,20 @@ authRouter.get(
     session: false,
   }),
   gitHubLogin
+);
+
+authRouter.get(
+  '/google/login',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+authRouter.get(
+  '/google/callback',
+  passport.authenticate('google', {
+    failureRedirect: '/',
+    session: false,
+  }),
+  googleLogin
 );
 
 authRouter.get('/logout', logout);
