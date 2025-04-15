@@ -1,32 +1,32 @@
 const express = require('express');
-const productRouter = express.Router();
+const inventoryRouter = express.Router();
 
 /**
  * @swagger
  * tags:
- *   name: Products
- *   description: Product management
+ *   name: Inventory
+ *   description: Inventory management
  */
 
 /**
  * @swagger
- * /api/v1/product:
+ * /api/v1/inventory:
  *   post:
- *     summary: Create a new product
- *     tags: [Products]
+ *     summary: Create a new inventory
+ *     tags: [Inventory]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/ProductRequest'
+ *             $ref: '#/components/schemas/InventoryRequest'
  *     responses:
  *       201:
- *         description: Product created successfully
+ *         description: Inventory created successfully
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/ProductResponse'
+ *               $ref: '#/components/schemas/InventoryResponse'
  *       422:
  *         description: Required data incorrect/missing
  *         content:
@@ -40,14 +40,14 @@ const productRouter = express.Router();
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-productRouter.post('/', createProduct);
+inventoryRouter.post('/', createInventory);
 
 /**
  * @swagger
- * /api/v1/product:
+ * /api/v1/inventory:
  *   get:
  *     summary: Get all producs
- *     tags: [Products]
+ *     tags: [Inventory]
  *     responses:
  *       200:
  *         description: List of all producs
@@ -56,7 +56,7 @@ productRouter.post('/', createProduct);
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/ProductResponse'
+ *                 $ref: '#/components/schemas/InventoryResponse'
  *       500:
  *         description: Server error.
  *         content:
@@ -64,30 +64,30 @@ productRouter.post('/', createProduct);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-productRouter.get('/', getAllProducts);
+inventoryRouter.get('/', getAllInventory);
 
 /**
  * @swagger
- * /api/v1/product/{id}:
+ * /api/v1/inventory/{id}:
  *   get:
- *     summary: Get product by ID
- *     tags: [Products]
+ *     summary: Get inventory by ID
+ *     tags: [Inventory]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: Product ID
+ *         description: Inventory ID
  *     responses:
  *       200:
- *         description: Product found
+ *         description: Inventory found
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/ProductResponse'
+ *               $ref: '#/components/schemas/InventoryResponse'
  *       404:
- *         description: Product not found
+ *         description: Inventory not found
  *         content:
  *           application/json:
  *             schema:
@@ -99,36 +99,36 @@ productRouter.get('/', getAllProducts);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-productRouter.get('/:id', getProductById);
+inventoryRouter.get('/:id', getInventoryById);
 
 /**
  * @swagger
- * /api/v1/product/{id}:
+ * /api/v1/inventory/{id}:
  *   put:
- *     summary: Update a product
- *     tags: [Products]
+ *     summary: Update a inventory
+ *     tags: [Inventory]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: Product ID
+ *         description: Inventory ID
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/ProductRequest'
+ *             $ref: '#/components/schemas/InventoryRequest'
  *     responses:
  *       200:
- *         description: Product updated successfully
+ *         description: Inventory updated successfully
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/ProductResponse'
+ *               $ref: '#/components/schemas/InventoryResponse'
  *       404:
- *         description: Product not found
+ *         description: Inventory not found
  *         content:
  *           application/json:
  *             schema:
@@ -146,24 +146,24 @@ productRouter.get('/:id', getProductById);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-productRouter.put('/:id', updateProductById);
+inventoryRouter.put('/:id', updateInventoryById);
 
 /**
  * @swagger
- * /api/v1/product/{id}:
+ * /api/v1/inventory/{id}:
  *   delete:
- *     summary: Delete a product
- *     tags: [Products]
+ *     summary: Delete a inventory
+ *     tags: [Inventory]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: Product ID
+ *         description: Inventory ID
  *     responses:
  *       200:
- *         description: Product deleted
+ *         description: Inventory deleted
  *         content:
  *           application/json:
  *             schema:
@@ -171,9 +171,9 @@ productRouter.put('/:id', updateProductById);
  *               properties:
  *                 message:
  *                   type: string
- *                   example: Product deleted
+ *                   example: Inventory deleted
  *       404:
- *         description: Product not found
+ *         description: Inventory not found
  *         content:
  *           application/json:
  *             schema:
@@ -185,6 +185,6 @@ productRouter.put('/:id', updateProductById);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-productRouter.delete('/:id', deleteProductById);
+inventoryRouter.delete('/:id', deleteInventoryById);
 
-module.exports = productRouter;
+module.exports = inventoryRouter;
