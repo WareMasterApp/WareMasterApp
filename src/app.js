@@ -14,6 +14,7 @@ const { SECRET } = require('./utils/const.env');
 const app = express();
 app.use(cors());
 app.use(logger('dev'));
+app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(session({ secret: SECRET, resave: true, saveUninitialized: true }));
 app.use(passportStrategy.initialize());

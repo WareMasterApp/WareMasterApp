@@ -1,4 +1,6 @@
 const passportStrategy = require('passport');
+const Account = require('../models/Account');
+const LocalStrategy = require('passport-local').Strategy;
 const GitHubStrategy = require('passport-github2').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const {
@@ -11,6 +13,10 @@ const {
 } = require('../utils/const.env');
 
 passportStrategy.use(
+  new LocalStrategy({ usernameField: 'email' }, Account.authenticate())
+);
+
+passportStrategy.use(
   new GitHubStrategy(
     {
       clientID: GH_CLIENT_ID,
@@ -18,9 +24,20 @@ passportStrategy.use(
       callbackURL: GH_CALLBACK_URL,
     },
     async (accessToken, refreshToken, profile, done) => {
-      // TODO: Add a user to the database
-      // For simplicity, we'll just return the profile here
-      return done(null, profile);
+      let account = await Account.findOne({ providerId: profile.nodeId });
+      if (!account) {
+        const { nodeId: providerId, username: name, provider } = profile;
+        account = await Account.register(
+          {
+            providerId,
+            name,
+            provider,
+            email: `${providerId}@${provider}.wmapi`,
+          },
+          providerId
+        );
+      }
+      return done(null, account);
     }
   )
 );
@@ -33,19 +50,33 @@ passportStrategy.use(
       callbackURL: GOOGLE_CALLBACK_URL,
       passReqToCallback: true, // Allow access to req object in callback
     },
-    (req, accessToken, refreshToken, profile, done) => {
-      // TODO: Add a user to the database
-      // For simplicity, we'll just return the profile here
-      return done(null, profile);
+    async (req, accessToken, refreshToken, profile, done) => {
+      let account = await Account.findOne({ providerId: profile.id });
+      if (!account) {
+        const { id: providerId, displayName: name, provider } = profile;
+        account = await Account.register(
+          {
+            providerId,
+            name,
+            provider,
+            email: `${providerId}@${provider}.wmapi`,
+          },
+          providerId
+        );
+      }
+      return done(null, account);
     }
   )
 );
 
-passportStrategy.serializeUser((user, done) => {
-  done(null, user);
-});
-passportStrategy.deserializeUser((obj, done) => {
-  done(null, obj);
-});
+// passportStrategy.serializeUser((user, done) => {
+//   done(null, user);
+// });
+// passportStrategy.deserializeUser((obj, done) => {
+//   done(null, obj);
+// });
+
+passportStrategy.serializeUser(Account.serializeUser());
+passportStrategy.deserializeUser(Account.deserializeUser());
 
 module.exports = passportStrategy;

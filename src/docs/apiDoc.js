@@ -51,23 +51,30 @@ const options = {
               example: 'Company Inc',
               required: true,
             },
+            email: {
+              type: 'string',
+              example: 'company@email.com',
+              required: true,
+            },
+            password: {
+              type: 'string',
+              example: 'MyPassword@123',
+              required: true,
+            },
             size: {
               type: 'string',
               enum: ['individual', 'family', 'organization', 'enterprise'],
               example: 'organization',
-              required: true,
             },
             plan: {
               type: 'string',
               enum: ['free', 'pro', 'enterprise'],
               example: 'pro',
-              required: true,
             },
           },
         },
         AccountResponse: {
           allOf: [
-            { $ref: '#/components/schemas/AccountRequest' },
             {
               type: 'object',
               properties: {
@@ -75,6 +82,12 @@ const options = {
                   type: 'string',
                   example: '660fc4fcf62aeac252e7a2ff',
                 },
+              },
+            },
+            { $ref: '#/components/schemas/AccountRequest' },
+            {
+              type: 'object',
+              properties: {
                 createdAt: {
                   type: 'string',
                   format: 'date-time',

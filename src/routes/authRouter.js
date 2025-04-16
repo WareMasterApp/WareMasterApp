@@ -1,13 +1,24 @@
 const express = require('express');
 const authRouter = express.Router();
 const passport = require('../helpers/pasportStrategy');
+const { registerAccount } = require('../controllers/accountController');
 const {
+  localLogin,
   gitHubLogin,
-  logout,
   googleLogin,
+  logout,
 } = require('../controllers/authController');
 
-authRouter.get('/login', () => {});
+authRouter.post('/signup', registerAccount);
+
+authRouter.post(
+  '/login',
+  passport.authenticate('local', {
+    failureRedirect: '/',
+    session: false,
+  }),
+  localLogin
+);
 
 authRouter.get('/github/login', passport.authenticate('github'));
 
