@@ -66,7 +66,7 @@ warehouseRouter.post('/', isAuthenticated, createWarehouse);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-warehouseRouter.get('/', isAuthenticated, getAllWarehouses);
+warehouseRouter.get('/', getAllWarehouses);
 
 /**
  * @swagger
@@ -101,7 +101,7 @@ warehouseRouter.get('/', isAuthenticated, getAllWarehouses);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-warehouseRouter.get('/:id', isAuthenticated, getWarehouseById);
+warehouseRouter.get('/:id', getWarehouseById);
 
 /**
  * @swagger
