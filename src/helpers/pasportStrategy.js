@@ -48,7 +48,7 @@ passportStrategy.use(
       clientID: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,
       callbackURL: GOOGLE_CALLBACK_URL,
-      passReqToCallback: true, // Allow access to req object in callback
+      passReqToCallback: true,
     },
     async (req, accessToken, refreshToken, profile, done) => {
       let account = await Account.findOne({ providerId: profile.id });
@@ -68,13 +68,6 @@ passportStrategy.use(
     }
   )
 );
-
-// passportStrategy.serializeUser((user, done) => {
-//   done(null, user);
-// });
-// passportStrategy.deserializeUser((obj, done) => {
-//   done(null, obj);
-// });
 
 passportStrategy.serializeUser(Account.serializeUser());
 passportStrategy.deserializeUser(Account.deserializeUser());
