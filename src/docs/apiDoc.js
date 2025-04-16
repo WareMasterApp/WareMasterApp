@@ -113,22 +113,20 @@ const options = {
               example: 'Dow',
               required: true,
             },
+            email: {
+              type: 'string',
+              example: 'john.dow@email.com',
+              required: [true, 'Email is required'],
+            },
             role: {
               type: 'string',
               enum: ['owner', 'admin', 'member'],
               example: 'member',
-              required: true,
             },
             status: {
               type: 'string',
               enum: ['active', 'suspended', 'pending', 'deleted'],
               example: 'active',
-              required: true,
-            },
-            accountId: {
-              type: 'string',
-              example: '660fc4fcf62aeac252e7a2ff',
-              required: true,
             },
           },
         },
