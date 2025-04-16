@@ -72,7 +72,7 @@ brandRouter.post('/', isAuthenticated, createBrand);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-brandRouter.get('/', isAuthenticated, getAllBrands);
+brandRouter.get('/', getAllBrands);
 
 /**
  * @swagger
@@ -107,7 +107,7 @@ brandRouter.get('/', isAuthenticated, getAllBrands);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-brandRouter.get('/:id', isAuthenticated, getBrandById);
+brandRouter.get('/:id', getBrandById);
 
 /**
  * @swagger

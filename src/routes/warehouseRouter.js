@@ -1,5 +1,6 @@
 const express = require('express');
 const warehouseRouter = express.Router();
+const { getAllWarehouses, createWarehouse, getWarehouseById, updateWarehouseById, deleteWarehouseById } = require('../controllers/warehouseController');
 const { isAuthenticated } = require('../middleware/authenticate');
 
 /**
@@ -65,7 +66,7 @@ warehouseRouter.post('/', isAuthenticated, createWarehouse);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-warehouseRouter.get('/', isAuthenticated, getAllWarehouses);
+warehouseRouter.get('/', getAllWarehouses);
 
 /**
  * @swagger
@@ -100,7 +101,7 @@ warehouseRouter.get('/', isAuthenticated, getAllWarehouses);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-warehouseRouter.get('/:id', isAuthenticated, getWarehouseById);
+warehouseRouter.get('/:id', getWarehouseById);
 
 /**
  * @swagger

@@ -1,6 +1,7 @@
 const express = require('express');
-const { isAuthenticated } = require('../middleware/authenticate');
 const productRouter = express.Router();
+const { isAuthenticated } = require('../middleware/authenticate');
+const { createProduct, getAllProducts, getProductById, updateProductById, deleteProductById } = require('../controllers/productController');
 
 /**
  * @swagger
@@ -65,7 +66,7 @@ productRouter.post('/', isAuthenticated, createProduct);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-productRouter.get('/', isAuthenticated, getAllProducts);
+productRouter.get('/', getAllProducts);
 
 /**
  * @swagger
@@ -100,7 +101,7 @@ productRouter.get('/', isAuthenticated, getAllProducts);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-productRouter.get('/:id', isAuthenticated, getProductById);
+productRouter.get('/:id', getProductById);
 
 /**
  * @swagger
