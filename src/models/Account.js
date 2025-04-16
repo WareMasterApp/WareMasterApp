@@ -31,6 +31,7 @@ const AccountSchema = new mongoose.Schema(
     providerId: {
       type: String,
       unique: [true, 'User already registered'],
+      sparse: true,
     },
     isActive: {
       type: Boolean,
