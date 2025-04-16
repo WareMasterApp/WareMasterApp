@@ -1,5 +1,12 @@
 const express = require('express');
 const { isAuthenticated } = require('../middleware/authenticate');
+const {
+  createUser,
+  getAllUsers,
+  getUserById,
+  updateUserById,
+  deleteUserById,
+} = require('../controllers/userController');
 const userRouter = express.Router();
 
 /**
@@ -65,7 +72,7 @@ userRouter.post('/', isAuthenticated, createUser);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-userRouter.get('/', isAuthenticated, getAllUsers);
+userRouter.get('/', getAllUsers);
 
 /**
  * @swagger
@@ -100,7 +107,7 @@ userRouter.get('/', isAuthenticated, getAllUsers);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-userRouter.get('/:id', isAuthenticated, getUserById);
+userRouter.get('/:id', getUserById);
 
 /**
  * @swagger
