@@ -1,11 +1,14 @@
+const localLogin = (req, res) => {
+  req.session.user = req.user._doc;
+  res.redirect('/api-docs');
+};
+
 const gitHubLogin = (req, res) => {
-  console.log('USER: ', req.user);
   req.session.user = req.user;
   res.redirect('/api-docs');
 };
 
 const googleLogin = (req, res) => {
-  console.log('USER: ', req.user);
   req.session.user = req.user;
   res.redirect('/api-docs');
 };
@@ -20,6 +23,7 @@ const logout = (req, res, next) => {
 };
 
 module.exports = {
+  localLogin,
   gitHubLogin,
   googleLogin,
   logout,
