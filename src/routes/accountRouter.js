@@ -72,7 +72,7 @@ accountRouter.post('/', isAuthenticated, createAccount);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-accountRouter.get('/', isAuthenticated, getAllAccounts);
+accountRouter.get('/', getAllAccounts);
 
 /**
  * @swagger
@@ -107,7 +107,7 @@ accountRouter.get('/', isAuthenticated, getAllAccounts);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-accountRouter.get('/:id', isAuthenticated, getAccountById);
+accountRouter.get('/:id', getAccountById);
 
 /**
  * @swagger

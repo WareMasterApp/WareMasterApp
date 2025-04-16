@@ -183,6 +183,110 @@ const options = {
             },
           ],
         },
+        WarehouseRequest: {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string',
+              example: 'Kitchen',
+              required: true,
+            },
+            address: {
+              type: 'string',
+              example: '123 Street',
+            },
+          },
+        },
+        WarehouseResponse: {
+          allOf: [
+            { $ref: '#/components/schemas/WarehouseRequest' },
+            {
+              type: 'object',
+              properties: {
+                _id: {
+                  type: 'string',
+                  example: '6615460dc6cfb49aa14d287f',
+                },
+                createdAt: {
+                  type: 'string',
+                  format: 'date-time',
+                },
+                updatedAt: {
+                  type: 'string',
+                  format: 'date-time',
+                },
+              },
+            },
+          ],
+        },
+        ProductRequest: {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string',
+              example: 'Package of Apple',
+              required: true,
+            },
+            sku: {
+              type: 'string',
+              example: 'sku',
+            },
+            description: {
+              type: 'string',
+              example: 'A delicious fruit',
+              required: true,
+            },
+            category: {
+              type: 'string',
+              example: 'Fruit',
+              required: true,
+            },
+            brandId: {
+              type: 'string',
+              example: '6615460dc6cfb49aa14d287f',
+              ref: 'Brand',
+              required: true,
+            },
+            weight: {
+              type: 'string',
+              example: '2 pounds',
+            },
+            barcode: {
+              type: 'string',
+              example: '012345678911',
+            },
+            imageUrl: {
+              type: 'string',
+              example: 'google.com.br/picture.jpg',
+            },
+          },
+        },
+        ProductResponse: {
+          allOf: [
+            { $ref: '#/components/schemas/ProductRequest' },
+            {
+              type: 'object',
+              properties: {
+                _id: {
+                  type: 'string',
+                  example: '6615460dc6cfb49aa14d287f',
+                },
+                isActive: {
+                  type: 'boolean',
+                  example: true,
+                },
+                createdAt: {
+                  type: 'string',
+                  format: 'date-time',
+                },
+                updatedAt: {
+                  type: 'string',
+                  format: 'date-time',
+                },
+              },
+            },
+          ],
+        },
         ErrorExample: {
           type: 'object',
           properties: {

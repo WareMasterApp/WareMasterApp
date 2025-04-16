@@ -8,6 +8,8 @@ const passportStrategy = require('./helpers/pasportStrategy');
 const authRouter = require('./routes/authRouter');
 const accountRouter = require('./routes/accountRouter');
 const brandRouter = require('./routes/brandRouter');
+const warehouseRouter = require('./routes/warehouseRouter');
+const productRouter = require('./routes/productRouter');
 const { swaggerSpec, swaggerUiOptions } = require('./docs/apiDoc');
 const { SECRET } = require('./utils/const.env');
 
@@ -34,6 +36,8 @@ app.use('/auth', authRouter);
  */
 app.use('/api/v1/account', accountRouter);
 app.use('/api/v1/brand', brandRouter);
+app.use('/api/v1/warehouse', warehouseRouter);
+app.use('/api/v1/product', productRouter);
 
 /**
  * Swagger Documentation

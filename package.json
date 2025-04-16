@@ -5,6 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "jtest": "jest --watchAll",
+    "jtest:ci": "jest",
+    "jtest:coverage": "jest --coverage",
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
@@ -29,8 +32,13 @@
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.14",
     "@types/passport-github2": "^1.2.9",
-    "nodemon": "^3.1.9"
+    "@types/supertest": "^6.0.3",
+    "jest": "^29.7.0",
+    "mongodb-memory-server": "^10.1.4",
+    "nodemon": "^3.1.9",
+    "supertest": "^7.1.0"
   },
   "packageManager": "pnpm@10.5.2+sha512.da9dc28cd3ff40d0592188235ab25d3202add8a207afbedc682220e4a0029ffbff4562102b9e6e46b4e3f9e8bd53e6d05de48544b0c57d4b0179e22c76d1199b"
 }
