@@ -20,6 +20,7 @@ describe('Account API GET Endpoints', () => {
     // Create test data once for all tests
     testAccount = await Account.create({
       name: 'Test Account',
+      email: 'email@provider.wmapi',
       size: 'enterprise',
       plan: 'enterprise',
     });
@@ -50,6 +51,7 @@ describe('Account API GET Endpoints', () => {
 
       expect(res.body).toMatchObject({
         name: 'Test Account',
+        email: 'email@provider.wmapi',
         size: 'enterprise',
         plan: 'enterprise',
       });
