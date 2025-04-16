@@ -1,7 +1,6 @@
 const swaggerJsDoc = require('swagger-jsdoc');
 const { SERVER_URL } = require('../utils/const.env');
 const { apiDocDescription } = require('../utils/const');
-const { default: mongoose } = require('mongoose');
 
 const options = {
   definition: {
