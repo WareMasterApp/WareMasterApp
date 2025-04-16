@@ -183,6 +183,42 @@ const options = {
             },
           ],
         },
+        WarehouseRequest: {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string',
+              example: 'Kitchen',
+              required: true,
+            },
+            address: {
+              type: 'string',
+              example: '123 Street',
+            },
+          },
+        },
+        WarehouseResponse: {
+          allOf: [
+            { $ref: '#/components/schemas/WarehouseRequest' },
+            {
+              type: 'object',
+              properties: {
+                _id: {
+                  type: 'string',
+                  example: '6615460dc6cfb49aa14d287f',
+                },
+                createdAt: {
+                  type: 'string',
+                  format: 'date-time',
+                },
+                updatedAt: {
+                  type: 'string',
+                  format: 'date-time',
+                },
+              },
+            },
+          ],
+        },
         ErrorExample: {
           type: 'object',
           properties: {

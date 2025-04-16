@@ -1,5 +1,6 @@
 const express = require('express');
 const warehouseRouter = express.Router();
+const { getAllWarehouses, createWarehouse, getWarehouseById, updateWarehouseById, deleteWarehouseById } = require('../controllers/warehouseController');
 const { isAuthenticated } = require('../middleware/authenticate');
 
 /**
