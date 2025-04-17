@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WareMaster API</title>
+    <title>Sign Up | WareMaster API</title>
     <meta name="author" content="Vermont Garcia" />
     <meta name="description" content="WareMaster API - CSE341 Web Services" />
     <meta
@@ -73,10 +73,20 @@
       <!-- Login Page Content -->
       <div class="thankyou">
         <section>
-          <h1>Login</h1>
+          <h1>Sign Up</h1>
           <div id="login">
-            <form class="form" action="/auth/login" method="post">
+            <form class="form" action="/auth/signup" method="post">
               <fieldset>
+                <label
+                  >Name<span class="required">*</span>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    required
+                    autocomplete="organization"
+                  />
+                </label>
                 <label
                   >Email<span class="required">*</span>
                   <input
@@ -84,11 +94,11 @@
                     name="email"
                     id="email"
                     required
-                    autocomplete
+                    autocomplete="email"
                   />
                 </label>
                 <label id="password-field"
-                  >Password<span class="required">*</span>
+                  ><span>Password</span> <span class="required">*</span>
                   <input
                     type="password"
                     name="password"
@@ -103,10 +113,10 @@
                 </label>
               </fieldset>
               <fieldset class="submit-btn-container">
-                <input type="submit" role="button" value="Login" />
+                <input type="submit" role="button" value="Signup" />
               </fieldset>
               <div>
-                <p>No account? <a href="/signup.html">Sign Up</a></p>
+                <p>Have account? <a href="/">Login</a></p>
               </div>
             </form>
           </div>
@@ -122,8 +132,6 @@
               <fieldset class="submit-btn-container">
                 <input type="submit" role="button" value="Login with GitHub" />
               </fieldset>
-            </form>
-            <form class="form" action="/auth/google/login">
               <fieldset class="submit-btn-container">
                 <input type="submit" role="button" value="Login with Google" />
               </fieldset>

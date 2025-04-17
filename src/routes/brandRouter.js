@@ -1,6 +1,13 @@
 const express = require('express');
 const brandRouter = express.Router();
-const { createBrand, getAllBrands, getBrandById, updateBrandById, deleteBrandById } = require('../controllers/brandController');
+const { isAuthenticated } = require('../middleware/authenticate');
+const {
+  createBrand,
+  getAllBrands,
+  getBrandById,
+  updateBrandById,
+  deleteBrandById,
+} = require('../controllers/brandController');
 
 /**
  * @swagger
@@ -41,7 +48,7 @@ const { createBrand, getAllBrands, getBrandById, updateBrandById, deleteBrandByI
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-brandRouter.post('/', createBrand);
+brandRouter.post('/', isAuthenticated, createBrand);
 
 /**
  * @swagger
@@ -147,7 +154,7 @@ brandRouter.get('/:id', getBrandById);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-brandRouter.put('/:id', updateBrandById);
+brandRouter.put('/:id', isAuthenticated, updateBrandById);
 
 /**
  * @swagger
@@ -186,6 +193,6 @@ brandRouter.put('/:id', updateBrandById);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-brandRouter.delete('/:id', deleteBrandById);
+brandRouter.delete('/:id', isAuthenticated, deleteBrandById);
 
 module.exports = brandRouter;
