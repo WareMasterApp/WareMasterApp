@@ -1,6 +1,7 @@
 const swaggerJsDoc = require('swagger-jsdoc');
 const { SERVER_URL } = require('../utils/const.env');
 const { apiDocDescription } = require('../utils/const');
+const Inventory = require('../models/Inventory');
 
 const options = {
   definition: {
@@ -285,6 +286,53 @@ const options = {
                 isActive: {
                   type: 'boolean',
                   example: true,
+                },
+                createdAt: {
+                  type: 'string',
+                  format: 'date-time',
+                },
+                updatedAt: {
+                  type: 'string',
+                  format: 'date-time',
+                },
+              },
+            },
+          ],
+        },
+        InventoryRequest: {
+          type: 'object',
+          properties: {
+            productId: {
+              type: 'string',
+              example: '507f1f77bcf86cd799439011',
+              required: true,
+            },
+            warehouseId: {
+              type: 'string',
+              example: '658d1f77bcf86cd799439022',
+              required: true,
+            },
+            quantity: {
+              type: 'number',
+              minimum: 0,
+              default: 1,
+              example: 10,
+            },
+          },
+        },
+        InventoryResponse: {
+          allOf: [
+            { $ref: '#/components/schemas/InventoryRequest' },
+            {
+              type: 'object',
+              properties: {
+                _id: {
+                  type: 'string',
+                  example: '658d1f77bcf86cd799439033',
+                },
+                brandId: {
+                  type: 'string',
+                  example: '558d1f77bcf86cd799439044',
                 },
                 createdAt: {
                   type: 'string',

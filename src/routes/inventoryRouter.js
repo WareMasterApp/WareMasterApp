@@ -1,5 +1,13 @@
 const express = require('express');
 const { isAuthenticated } = require('../middleware/authenticate');
+const {
+  createInventory,
+  getAllInventories,
+  getInventoryByWarehouse,
+  getInventoryByBrand,
+  addProductToInventory,
+  removeProductFromInventory,
+} = require('../controllers/inventoryController');
 const inventoryRouter = express.Router();
 
 /**
@@ -47,11 +55,11 @@ inventoryRouter.post('/', isAuthenticated, createInventory);
  * @swagger
  * /api/v1/inventory:
  *   get:
- *     summary: Get all producs
+ *     summary: Get all products
  *     tags: [Inventory]
  *     responses:
  *       200:
- *         description: List of all producs
+ *         description: List of all products
  *         content:
  *           application/json:
  *             schema:
@@ -65,30 +73,30 @@ inventoryRouter.post('/', isAuthenticated, createInventory);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-inventoryRouter.get('/', isAuthenticated, getAllInventory);
+inventoryRouter.get('/', getAllInventories);
 
 /**
  * @swagger
- * /api/v1/inventory/{id}:
+ * /api/v1/inventory/warehouse/{warehouseId}:
  *   get:
- *     summary: Get inventory by ID
+ *     summary: Get inventory by Warehouse ID
  *     tags: [Inventory]
  *     parameters:
  *       - in: path
- *         name: id
+ *         name: warehouseId
  *         schema:
  *           type: string
  *         required: true
- *         description: Inventory ID
+ *         description: Warehouse ID
  *     responses:
  *       200:
- *         description: Inventory found
+ *         description: Inventory list for Warehouse
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/InventoryResponse'
  *       404:
- *         description: Inventory not found
+ *         description: Inventory not found for this Warehouse
  *         content:
  *           application/json:
  *             schema:
@@ -100,36 +108,71 @@ inventoryRouter.get('/', isAuthenticated, getAllInventory);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-inventoryRouter.get('/:id', isAuthenticated, getInventoryById);
+inventoryRouter.get('/warehouse/:warehouseId', getInventoryByWarehouse);
 
 /**
  * @swagger
- * /api/v1/inventory/{id}:
- *   put:
- *     summary: Update a inventory
+ * /api/v1/inventory/brand/{brandId}:
+ *   get:
+ *     summary: Get inventory by Brand ID
  *     tags: [Inventory]
  *     parameters:
  *       - in: path
- *         name: id
- *         required: true
+ *         name: brandId
  *         schema:
  *           type: string
- *         description: Inventory ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/InventoryRequest'
+ *         required: true
+ *         description: Brand ID
  *     responses:
  *       200:
- *         description: Inventory updated successfully
+ *         description: Inventory list for Brand
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/InventoryResponse'
  *       404:
- *         description: Inventory not found
+ *         description: Inventory not found for this Brand
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/ObjectNotFound"
+ *       500:
+ *         description: Server error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/ServerError"
+ */
+inventoryRouter.get('/brand/:brandId', getInventoryByBrand);
+
+/**
+ * @swagger
+ * /api/v1/inventory/add:
+ *   patch:
+ *     summary: Add (+1) product to inventory
+ *     tags: [Inventory]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               productId:
+ *                 type: string
+ *                 example: "507f1f77bcf86cd799439011"
+ *               warehouseId:
+ *                 type: string
+ *                 example: "658d1f77bcf86cd799439022"
+ *     responses:
+ *       200:
+ *         description: Product added successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/InventoryResponse'
+ *       404:
+ *         description: Product or Warehouse not found
  *         content:
  *           application/json:
  *             schema:
@@ -147,38 +190,46 @@ inventoryRouter.get('/:id', isAuthenticated, getInventoryById);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-inventoryRouter.put('/:id', isAuthenticated, updateInventoryById);
+inventoryRouter.patch('/add', isAuthenticated, addProductToInventory);
 
 /**
  * @swagger
- * /api/v1/inventory/{id}:
- *   delete:
- *     summary: Delete a inventory
+ * /api/v1/inventory/remove:
+ *   patch:
+ *     summary: Remove (-1) product from inventory
  *     tags: [Inventory]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: Inventory ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               productId:
+ *                 type: string
+ *                 example: "507f1f77bcf86cd799439011"
+ *               warehouseId:
+ *                 type: string
+ *                 example: "658d1f77bcf86cd799439022"
  *     responses:
  *       200:
- *         description: Inventory deleted
+ *         description: Product removed successfully
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: Inventory deleted
+ *               $ref: '#/components/schemas/InventoryResponse'
  *       404:
- *         description: Inventory not found
+ *         description: Product or Warehouse not found
  *         content:
  *           application/json:
  *             schema:
  *               $ref: "#/components/schemas/ObjectNotFound"
+ *       422:
+ *         description: Required data incorrect/missing
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/UnprocessableContent"
  *       500:
  *         description: Server error.
  *         content:
@@ -186,6 +237,6 @@ inventoryRouter.put('/:id', isAuthenticated, updateInventoryById);
  *             schema:
  *               $ref: "#/components/schemas/ServerError"
  */
-inventoryRouter.delete('/:id', isAuthenticated, deleteInventoryById);
+inventoryRouter.patch('/remove', isAuthenticated, removeProductFromInventory);
 
 module.exports = inventoryRouter;
